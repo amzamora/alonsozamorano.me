@@ -1,0 +1,134 @@
+.post-page {
+	padding-top: var(--header-height);
+	padding-left: 2.6rem;
+	padding-right: 2.6rem;
+	margin-bottom: 2.6rem;
+}
+
+@media only screen and (max-width: 500px) {
+	.post-page {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.post-page .wrapper {
+	max-width: 550px;
+	margin: auto;
+}
+
+.post-page h1,
+.post-page h2,
+.post-page h3,
+.post-page h4,
+.post-page h5,
+.post-page h6 {
+	font-weight: bold;
+	color: var(--primary-text-color);
+	font-family: var(--blog-font);
+}
+
+.post-page h1 {
+	font-size: 4rem;
+	margin-bottom: 2.33333rem;
+}
+
+@media only screen and (max-width: 500px) {
+	.post-page h1 {
+		font-size: 2rem;
+	}
+}
+
+.post-page h2     {
+	font-size: 2rem;
+}
+@media only screen and (max-width: 500px) {
+	.post-page h2 {
+		font-size: 1.5rem;
+	}
+}
+.post-page * + h2 {margin-top: 2.5rem;}
+.post-page h1 + h2 {margin-top: 0;}
+
+.post-page h3     {
+		font-size: 1.5rem;
+	}
+
+@media only screen and (max-width: 500px) {
+	.post-page h3 {
+		font-size: 1.2rem;
+	}
+}
+.post-page * + h3 {margin-top: 2rem;}
+.post-page h2 + h3 {margin-top: 0;}
+
+.post-page * + h4 {margin-top: 1.5rem;}
+.post-page h3 + h4 {margin-top: 0;}
+
+.post-page .post-meta {
+	font-size: 0.88889rem;
+	color: var(--meta-text-color);
+	font-family: var(--blog-font);
+	margin-bottom: 0.722222rem;
+}
+
+.post-page p {
+		color: var(--secondary-text-color);
+		line-height: 1.5rem;
+	}
+
+.post-page img {
+		display: block;
+		max-width: 90%;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
+		margin: 1.5em auto;
+	}
+
+.post-page li {
+	color: var(--secondary-text-color);
+}
+
+@media only screen and (min-width: 1200px) {
+	.post-page {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+	}
+
+	.post-page .wrapper {
+		max-width: none;
+		width: 100%;
+		min-width: 0;
+		grid-column-start: 4;
+		grid-column-end: 10;
+	}
+}
+
+@media only screen and (min-width: 1600px) {
+	.post-page .wrapper {
+		grid-column-start: 5;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.post-page h1,
+	.post-page h2,
+	.post-page h3,
+	.post-page h4,
+	.post-page h5,
+	.post-page h6 {
+		color: var(--primary-text-color-dark);
+	}
+
+	.post-page .post-meta {
+		color: var(--meta-text-color-dark);
+	}
+
+	.post-page p {
+		color: var(--secondary-text-color-dark);
+	}
+
+	.post-page li {
+		color: var(--secondary-text-color-dark);
+	}
+}

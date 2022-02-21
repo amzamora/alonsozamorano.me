@@ -1,0 +1,22 @@
+:root {
+	/* Colors */
+	--primary-text-color: #0F0F0F;
+	--secondary-text-color: #393939;
+	--meta-text-color: #555555;
+	--background-color: #F6F6F6;
+
+	/* Colors dark theme */
+	--primary-text-color-dark: #EBEBEB;
+	--secondary-text-color-dark: #AFADAD;
+	--meta-text-color-dark: #959494;
+	--background-color-dark: #0F0F0F;
+
+	/* Fonts */
+	--base-font-size: 18px;
+	--primary-font: 'Inter';
+	--blog-font: 'Merriweather';
+	--menu-font: 'Roboto';
+
+	/* Other */
+	--header-height: 3.83rem;
+}
