@@ -1,0 +1,21 @@
+<%- include('../partials/header'); -%>
+
+<div class="blog">
+	<ul class="post-list">
+		<% posts.forEach((post) => { %>
+			<li class="post-list-item">
+				<h3>
+					<a class="post-link" href="<%- post.url %>">
+						<%- post.title %>
+					</a>
+				</h3>
+				<div class="post-meta"><%- post.date.toFormat('MMM d, yyyy')  %></div>
+				<div class="post-excerpt">
+					<%- post.excerpt %>
+				</div>
+			</li>
+		<% }); %>
+	</ul>
+</div>
+
+<%- include('../partials/footer'); -%>
