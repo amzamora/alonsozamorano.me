@@ -6,6 +6,7 @@ app.set('view engine', 'ejs')
 
 // Serve assets folder
 app.use(express.static('assets'))
+app.use('/imgs', express.static('posts/imgs'));
 
 // Routing
 app.get('/', (_, res) => {
@@ -45,7 +46,9 @@ function getPosts() {
 	let posts = [];
 
 	fs.readdirSync('posts').map(path => {
-		posts.push(getPost(path));
+        try {
+		    posts.push(getPost(path));
+        } catch (__) {}
 	});
 
 	return posts;
