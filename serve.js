@@ -56,9 +56,9 @@ function getPosts() {
 }
 
 function getPost(path) {
-	const file = matter(fs.readFileSync('posts/' + path).toString());
+	const file = matter(fs.readFileSync('posts/' + path).toString())
 	const data = file.data;
-	const content = file.content;
+	const content = file.content.replace(/(?<=!\[.*\]\()\.\//g, "/")
 
 	// Get date
 	const date = DateTime.fromISO(data.date);
