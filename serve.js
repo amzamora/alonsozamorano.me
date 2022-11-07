@@ -18,7 +18,8 @@ app.get('/blog', (req, res) => {
 app.get('/blog/:slug', (req, res) => {
     res.render('pages/post', {post: getPost(req.params.slug + '.md')})})
 
-// Start listening
+// Start serving
+console.log("Listening on http://localhost:3000")
 app.listen(3000)
 
 // Utilities
@@ -85,30 +86,3 @@ function getPost(path) {
 		content: markdown.render(content),
 	}
 }
-
-function deleteFile(file) {
-	if (fs.lstatSync(file).isDirectory()) {
-		deleteFolderRecursive(file);
-	}
-	else {
-		fs.unlinkSync(file);
-	}
-}
-
-// From: https://stackoverflow.com/a/12761924
-function deleteFolderRecursive(path) {
-	var files = [];
-	if(fs.existsSync(path)) {
-		files = fs.readdirSync(path);
-		files.forEach(function(file, index) {
-			var curPath = path + "/" + file;
-			if(fs.lstatSync(curPath).isDirectory()) {
-				deleteFolderRecursive(curPath);
-			}
-			else { // delete file
-				fs.unlinkSync(curPath);
-			}
-		});
-		fs.rmdirSync(path);
-	}
-};
