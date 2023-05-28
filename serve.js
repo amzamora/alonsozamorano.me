@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+const PORT = process.env.PORT | 3000
+
 // Config
 app.set('view engine', 'ejs')
 
@@ -19,8 +21,8 @@ app.get('/blog/:slug', (req, res) => {
     res.render('pages/post', {post: getPost(req.params.slug + '.md')})})
 
 // Start serving
-console.log("Listening on http://localhost:3000")
-app.listen(3000)
+console.log(`Listening on port ${PORT}`);
+app.listen(PORT)
 
 // Utilities
 // ---------
