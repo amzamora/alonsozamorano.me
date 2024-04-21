@@ -53,6 +53,10 @@ pre {
 	font-size: 0.85rem !important;
 }
 
+pre > code {
+	font-family: 'Menlo Regular', 'Times New Roman', Times, serif;
+}
+
 #markdown-toc li {
 	list-style: none;
 }
