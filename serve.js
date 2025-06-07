@@ -48,7 +48,7 @@ const markdown = require('markdown-it')({
 function getPosts() {
 	let posts = [];
 
-	fs.readdirSync('posts').map(path => {
+	fs.readdirSync('posts').forEach(path => {
         try {
 		    posts.push(getPost(path));
         } catch (__) {}
@@ -60,7 +60,7 @@ function getPosts() {
 function getPost(path) {
 	const file = matter(fs.readFileSync('posts/' + path).toString())
 	const data = file.data;
-	const content = file.content.replace(/(?<=!\[.*\]\()\.\//g, "/")
+	const content = file.content
 
 	// Get date
 	const date = DateTime.fromISO(data.date);
@@ -72,7 +72,7 @@ function getPost(path) {
 	let index = 0;
 	while (content[index] === '\n') index += 1;
 	let start = index;
-	while (content.substr(index, 13) !== '<!-- more -->') {
+	while (content.substr(index, 13) !== '<!-- more -->' && index < content.length - 13) {
 		index = index + 1;
 	}
 	let excerpt = markdown.render(content.substring(start, index));

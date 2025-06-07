@@ -19,4 +19,20 @@
 
 	/* Other */
 	--header-height: 3.83rem;
+
+	/* Colors */
+	--cyan: rgb(0, 199, 199);
+	--magenta: #c701c7;
+	--yellow: rgb(155, 155, 0);
+	--lime: rgb(0, 182, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Colors */
+		--cyan: rgb(0, 255, 255);
+		--magenta: rgb(255, 0, 255);
+		--yellow: rgb(255, 255, 0);
+		--lime: rgb(0, 255, 0);
+	}
 }

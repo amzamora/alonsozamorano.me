@@ -9,6 +9,48 @@
 	<link rel="stylesheet" id="css-theme" href="/css/main.css">
 	<link rel="icon"
 		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫀</text></svg>">
+	<script>
+		MathJax = {
+			output: {
+				displayAlign: 'left',
+				linebreaks: {
+					inline: true,
+					width: '100%',
+					lineleading: .2,
+					LinebreakVisitor: null,
+				}
+			},
+			tex: {
+				inlineMath: [['$', '$'], ['\\(', '\\)']]
+			},
+			svg: {
+				fontCache: 'global'
+			}
+		};
+	</script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+		integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"
+		integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6"
+		crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"
+		integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+		crossorigin="anonymous"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			renderMathInElement(document.body, {
+				trust: true,
+				delimiters: [
+					{ left: '$$', right: '$$', display: true },
+					{ left: '$', right: '$', display: false },
+					{ left: '\\(', right: '\\)', display: false },
+					{ left: '\\[', right: '\\]', display: true }
+				],
+				// • rendering keys, e.g.:
+				throwOnError: false
+			});
+		});
+	</script>
 </head>
 
 <body>
