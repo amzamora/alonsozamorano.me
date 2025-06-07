@@ -54,6 +54,8 @@ function getPosts() {
         } catch (__) {}
 	});
 
+	posts.sort((a, b) => b.date - a.date)
+
 	return posts;
 }
 
