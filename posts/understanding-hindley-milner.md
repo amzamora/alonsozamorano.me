@@ -3,21 +3,23 @@ title: 'Understanding Hindley–Milner'
 date: '2025-06-06'
 ---
 
-<u>Disclaimer:</u> Before starting, be warned this post is heavily inspired by the video series [Type Systems: Lambda calculus to Hindley-Milner](https://youtu.be/b5VhYkvOk30?list=PLoyEIY-nZq_uipRkxG79uzAgfqDuHzot-) by Adam Jones. I strongly recommend you watch this if you, like me, has been struggling to get into Hindley-Milner, and type theory in general.
-
-Hindley-Milner is a type system for the lambda calculus. A type system is a set of rules for assigning a type to expressions for a particular language. They serve to check annotated types are correct. Also, they allow to infer types and check that values passed to operations make sense. On the other hand, lambda calculus is a mathematical system created to reason about computation.
+<u>Disclaimer:</u> Before starting, be warned this post is inspired by the video series [Type Systems: Lambda calculus to Hindley-Milner](https://youtu.be/b5VhYkvOk30?list=PLoyEIY-nZq_uipRkxG79uzAgfqDuHzot-) by Adam Jones. I strongly recommend you watch this if you, like me, has been struggling to get into Hindley-Milner, and type theory in general.
 
 <!-- more -->
 
-This type system was originally described by J. Roger Hindley in [1969](https://www.cs.tufts.edu/~nr/cs257/archive/roger-hindley/principal-type-scheme.pdf) for combinatory logic. Then, rediscovered by Robin Milner in [1978](https://homepages.inf.ed.ac.uk/wadler/papers/papers-we-love/milner-type-polymorphism.pdf) for the ML programming language. Finally, Damas formalized the type system for lambda calculus in [1984](https://era.ed.ac.uk/bitstream/handle/1842/13555/Damas1984.Pdf?sequence=1&isAllowed=y).
+Hindley-Milner is a type system for the lambda calculus. A type system is a set of rules for assigning types to expressions. They can verify that annotated types are correct, or infer the types. On the other hand, lambda calculus is a mathematical system created to reason about computation. Is like a really really small programming language.
 
-The core value of Handley-Milner is to support generic programming while not needing type annotations. With the Hindley-Milner system, the most general type for an expression can be inferred.
+The type system was originally described by J. Roger Hindley in [1969](https://www.cs.tufts.edu/~nr/cs257/archive/roger-hindley/principal-type-scheme.pdf) for combinatory logic. Then, rediscovered by Robin Milner in [1978](https://homepages.inf.ed.ac.uk/wadler/papers/papers-we-love/milner-type-polymorphism.pdf) for the ML programming language. Finally, Damas formalized the type system for lambda calculus in [1984](https://era.ed.ac.uk/bitstream/handle/1842/13555/Damas1984.Pdf?sequence=1&isAllowed=y).
+
+The core value of Handley-Milner is to support generic programming while mostly not needing type annotations. With the Hindley-Milner system, the most general type for an expression can be inferred.
 
 Most popular languages that use variations of this system include [Haskell](https://www.haskell.org/), [OCaml](https://ocaml.org/), [Rust](https://www.rust-lang.org/), [Swift](https://www.swift.org/),  [Elm](https://elm-lang.org/) and [Gleam](https://gleam.run/).
 
 ## How this looks in practice?
 
-The easiest way to implement a type system is to require type annotations and then check that literals match with the annotation. Another alternative, is to not require annotations, but some expressions will still need them to disambiguate.
+The easiest way to implement a type system is to require type annotations, and then verify that incosistencies don't exist. The other easiest way to implement a type system it's to make the language sytanx directed. Meaning and integer literal always going to be an integer, unless stated otherwise. 
+
+This requires less type annotations, but some expressions will still need them to disambiguate. For example:
 
 ```python
 list = []
@@ -26,17 +28,17 @@ list.append(2)
 list.append(3)
 ```
 
-Here, `list` needs a type annotation to know what type of list it is even though we can clearly see that it is a list of integers. 
+Here, `list` needs a type annotation to know what type of list it is even though clearly its a list of integers. 
 
-In a Hindley-Milner type system, annotating list wouldn't be necessary. The type of list would be inferred based on how it is used. As after the declaration, we can see that integers are appended, so the list must be a list of integers.
+In a Hindley-Milner type system, annotating the type of the list wouldn't be necessary. The type of list would be inferred based on how it is used. We can see that integers are appended after the declaration, so the list must be a list of integers.
 
-This makes easy to write code that's easy to change, while maintaining static type safety. You can always add type annotations later.
+This makes easy to write generic code and code that's easy to change, while maintaining static type safety. If you want to be explicit, you can always add type annotations later.
 
 ## Formalization
 
 Hindley-Milner consists of a set of rules about types in lambda calculus. Then, an algorithm can make use of these rules to infer types. That's the case for **algorithm W** and **algorithm M**.
 
-### Lambda calculus with let polymorphism 
+### Lambda calculus with let polymorphism (The language)
 
 Its syntax can be described as:
 
@@ -104,7 +106,7 @@ A type scheme may consist of a  <span style="color: var(--magenta)">type</span>,
 
 Is where you store what type different variables have. It's a list of variable to type assignments. Is denoted generally with $\Gamma$.
 
-### Typing rules
+### Typing rules (The type system)
 
 A typing rule consists of a premise and a conclusion. If the premise is true, then its conclusion also must be true. They are denoted like:
 
@@ -148,7 +150,7 @@ $$
 
 <u>Let binding rule:</u> If in $\Gamma$ it follows that $e_0$ has type $\sigma$, and it follows that if we add $x : \sigma$ to typing context $e_1$ has type $\tau$. **Then**, it follows that the expression $let \ x = e_0 \ in \ e_1$ has type $\tau$.
 
-### Algorithm W
+### Algorithm W (An inference algorithm)
 
 The following is the first algorithm proposed to infer types in Hindlye-Milner types. It is a recursive algorithm that takes as input a **type context** and an **expression**, and returns a **substitution** and a **type**. The type is what we care about.
 
@@ -177,7 +179,7 @@ A <u>substitution</u> is a list of mappings from type variables to other types.
 
 The function <u>generalize</u> adds for all quantifiers to free type variables in a type. i.e. it adds a forall quantifier to all type variables in a type that are not currently quantified.
 
-### Algorithm M
+### Algorithm M (Another inference algorithm)
 
 M is also a recursive algorithm, but it takes as input a **type context**, a **expression**, and a **type**, and returns a **substitution**. If we want to infer the type of an expression $e$, we create a new type variable $\tau$ and call $M(\Gamma, e, \tau)$. Then we apply the resulting substitution to $\tau$ to know the type of $e$.
 
